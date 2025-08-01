@@ -4,17 +4,23 @@
 	3. Flex-layout;
 	4. Framework-layout: W3C-framework, Bootstrap;
 */
-body 
+
+@font-face
 {
+	font-family:"Tahoma";
+	src: url("windows-xp-tahoma-.otf.woff2");
+}
+
+body {
 	background-image: url('img/bliss.jpg');
 	/*background-size:auto;*/
-	background-size:cover;
-	font-family:Tahoma;
+	background-size: cover;
+	font-family: "Tahoma";
 }
 #main-window 
 {
 	width:400px;
-	height:300px;
+	height:350px;
 	/*background-color:rgb(235,233,216);*/
 }
 #title-bar
@@ -108,10 +114,165 @@ body
 		background-image: linear-gradient(to bottom left, #D95455, #FF3020);
 		box-shadow: inset 0px 0px 3px 3px #B48A8B;
 	}
-
+/*----------------------------------------------------------------------------------*/
 #client-rect 
 {
 	width: 400px;
-	height: 268px;
+	height: 312px;
 	background-color: rgb(235,233,216);
+	display:flex;
+}
+#border-left, #border-right 
+{
+	width:5px;
+	height:312px;
+	background-color:blue;
+}
+
+#border-left 
+{
+	background-image: linear-gradient(to right, #0022BBFF, #0055FFFF #0022BBFF);
+}
+
+
+
+#border-bottom 
+{
+	width: 400px;
+	height: 5px;
+	background-color: blue;
+}
+
+ #border-bottom 
+{
+	background-color: darkblue;
+	background-image: linear-gradient(to right,  #0055BBFF, #001177CC );
+}
+
+#border-right
+{
+	background-color: darkblue;
+	background-image: linear-gradient(to right, #001177CC, #0077BBFF, #001177CC );
+}
+/*----------------------------------------------------------------------------------*/
+
+
+#work-area
+{
+	width:390px;
+
+}
+/*----------------------------------------------------------------------------------*/
+
+#menu-bar
+{
+	border-bottom:solid 1px white;
+
+}
+#menu-bar button 
+{
+	background-color: rgb(235,233,216);
+	border:none;
+}
+#menu-bar button:hover
+{
+	box-shadow:1px 1px 0px grey;
+
+}
+
+	#menu-bar button:active
+	{
+		box-shadow:inset 1px 1px 0px grey;
+	}
+
+/*----------------------------------------------------------------------------------*/
+#display
+{
+	width:93%;
+	margin:10px;
+	text-align:right;
+	align-self:center;
+}
+/*----------------------------------------------------------------------------------*/
+.buttons
+{
+	display:flex;
+    justify-content:left;
+}
+
+	.buttons button 
+	{
+		width: 50px;
+		height: 40px;
+		color:darkblue;
+
+		border:solid 1px;
+		border-radius:5px;
+		box-shadow: inset 0 -3px 5px 1px lightgrey;
+	}
+
+	.buttons button:hover
+	{
+		background-color:lightgray;
+		box-shadow:inset 0px 0px 2px 1px #FFAA00;
+	}
+
+		.buttons button:active
+		{
+		
+			box-shadow: inset 0px 0px 2px 1px grey;
+		}
+
+
+.memory-buttons
+{
+	display: grid;
+	grid-template-columns: 50px; /*1 столбик, шириной 50рх*/
+	grid-template-rows: 40px 40px 40px 40px 40px; /*	 5 строк, высотой по 40рх*/
+	/*grid-template-rows: auto auto auto auto auto;*/
+	grid-gap: 10px; /*Расстояние (зазор) между ячейками сетки*/
+	margin:0 15px;
+}
+
+	.memory-buttons > button, .wide-buttons > button, .operational-buttons > button
+	{
+		color:red;
+		border-color:darkblue;
+	}
+	.wide-buttons
+	{
+		margin:0 10px;
+	}
+		.wide-buttons > button
+		{
+			/*color:red;*/
+			width: 93px;
+		}
+	#square 
+	{
+		width: 32px;
+		height: 32px;
+		margin: 5px;
+		border: inset 2px;
+	}
+/*----------------------------------------------------------------------------------*/
+.digits-and-operations
+{
+	display:flex;
+}
+.digit-buttons 
+{
+	display: grid;
+	grid-template-rows: 40px 40px 40px 40px; 
+	grid-template-columns: 50px 50px 50px; 
+	grid-gap:10px;
+	margin:10px 10px;
+}
+.operational-buttons
+{
+	display: grid;
+	grid-template-rows: 40px 40px 40px 40px;
+	grid-template-columns: 50px 50px;
+	grid-gap: 10px;
+	margin: 10px 0px;
 }
