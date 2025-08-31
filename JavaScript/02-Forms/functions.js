@@ -19,12 +19,19 @@ function SwitchBackground()
     let style = window.getComputedStyle(switchBackground);
     let backImage = style.getPropertyValue('background-image')
   //  switchBackground.style.backgroundColor = "black";
-    if (switchBackground.style.backgroundImage === 'url("img/moon.png")')
-    {
-        switchBackground.style.backgroundImage = 'url("img/sun.png")';
-    }
-    else
-    {
-        switchBackground.style.backgroundImage = 'url("img/moon.png")';
-    }
+  //  if (switchBackground.style.backgroundImage === 'url("img/moon.png")')
+  //  {
+  //      switchBackground.style.backgroundImage = 'url("img/sun.png")';
+//        document.body.className = 'dark';
+//    }
+ //   else
+ //   {
+//        switchBackground.style.backgroundImage = 'url("img/moon.png")';
+//        document.body.className = 'light';
+    //   }
+    let delay = document.getElementById('delay').value;
+    document.body.style.transition = `background-color ${delay}s, color ${delay}s`;
+    document.getElementById('switch-background').style.transition = `background-image ${delay}s`;
+    document.body.className = document.body.className === "light" ? "dark" : "light";
+   
 }
