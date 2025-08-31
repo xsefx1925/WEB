@@ -2,30 +2,34 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <title>WebForms</title>
+	<meta charset="utf-8" />
+	<title>WebForms</title>
+	<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<h1>WebForms</h1>
-    <form action="handler.php" method="post">
-        <label for="base">Основание степени</label> 
-     <input type="number" min="0" id="base" onchange="Power()"/>
-        <br />
+	<div id="header">
+		Header
+		<span id="mouse">
+		</span>
+		<div id="switch-background" onclick="SwitchBackground()" style="background-image:url('img/moon.png')"></div>
 
-       <label for="exponent">Показатель степени</label>
-        <input type="number" id="exponent" onchange="Power()"/>
-        <br />
-        
-        <div id="power"></div>
 
-    </form>
-    <script>
-        function Power()
-        { 
-          let base = document.getElementById("base").value;
-          let exponent = document.getElementById("exponent").value;
-          document.getElementById("power").innerHTML = base ** exponent;
-		}
-    </script>
+	</div>
+	<h1>WebForms</h1>
+	<form action="handler.php" method="post">
+		<label for="base">Основание степени</label>
+		<input type="number" min="0" id="base" onchange="Power()" />
+		<br />
+
+		<label for="exponent">Показатель степени</label>
+		<input type="number" id="exponent" onchange="Power()" />
+		<br />
+
+		<div id="power"></div>
+
+	</form>
+	<script src="functions.js">
+
+	</script>
 </body>
 </html>
