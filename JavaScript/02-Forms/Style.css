@@ -1,19 +1,17 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
+
 body 
 {
-	font-family:Roboto Condensed;
-	font-size:32px;
+	font-family: Roboto Condensed;
+	font-size: 32px;
 }
-#header
-{
-	display:flex;
-	justify-content:space-between;
 
-}
-input, option /*[type = number]*/ 
+#header 
 {
-	font-size: 24px;
+	display: flex;
+	justify-content: space-between;
 }
+
 #switch-background 
 {
 	width: 32px;
@@ -22,32 +20,34 @@ input, option /*[type = number]*/
 	background-image: url("img/moon.png");
 }
 
-.light
+.light 
 {
-	background:#D8D8D8;
-	color:#323232;
+	background: #D8D8D8;
+	color: #323232;
 }
 
-.light #switch-background
-{
-	background-image: url("img/moon.png");
-}
+	.light #switch-background 
+	{
+		background-image: url("img/moon.png");
+	}
 
-.dark 
+.dark
 {
 	background: #323232;
 	color: #D8D8D8;
 }
+
 	.dark #switch-background 
 	{
 		filter: brightness(0) invert(1);
 		background-image: url("img/sun.png");
 	}
 
-	/*-------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------*/
 
 
-form {
+form 
+{
 	border: solid 1px;
 	border-radius: 10px;
 	margin: 5%;
@@ -55,7 +55,8 @@ form {
 	box-shadow: 0px 0px 5px 5px grey;
 }
 
-.pair {
+.pair 
+{
 	/*border: solid 1px;*/
 	width: 70%;
 	display: flex;
@@ -64,19 +65,43 @@ form {
 	padding: 1px;
 }
 
+input, select /*[type = number]*/ 
+{
+	font-size: 24px;
+}
+
 #power-form input 
 {
 	width: 24%;
 }
-input[type=checkbox], input[type=radio]
 
+input[type=checkbox], input[type=radio] 
 {
-	width:24px;
-	height:24px;
+	width: 24px;
+	height: 24px;
 }
 
-fieldset
+fieldset 
 {
-	width:46%;
-	
+	width: 46%;
+}
+
+#registration 
+{
+	display: flex;
+}
+
+#upload-photo 
+{
+	border: solid 1px;
+	width: 59vh;
+	height: 80vh;
+}
+
+
+#upload-photo img
+{
+	border: solid 1px;
+	width: 38vh;
+	height: 58vh;
 }
