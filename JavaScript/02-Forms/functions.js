@@ -79,6 +79,9 @@ function addLeadingZero(number)
 {
     return number < 10 ? "0"+number : number;
 }
+
+//////
+
 document.getElementById("btn-start").onclick = function startCountdownTimer()
 {
     let targetDateControl = document.getElementById("target-date");
@@ -100,6 +103,7 @@ document.getElementById("btn-start").onclick = function startCountdownTimer()
     }
 }
 
+
 function tickCountdown()
 {
     if (!document.getElementById("target-time").disabled) return;
@@ -119,4 +123,68 @@ function tickCountdown()
     //Debug target datetime:
     document.getElementById("target-date-value").innerHTML = targetDate;
     document.getElementById("target-time-value").innerHTML = targetTime;
+}
+
+
+/////
+document.getElementById("btn-start").onclick = function startCountdownTimer()
+{
+    let targetDateControl = document.getElementById("target-date");
+    let targetTimeControl = document.getElementById("target-time");
+    let btnStart = document.getElementById("btn-start");
+    targetDateControl.disabled = targetTimeControl.disabled = !targetDateControl.disabled;
+
+    if (btnStart.value === "Start")
+    {
+        btnStart.value = "Stop";
+        tickCountdown();
+    } else
+    {
+        btnStart.value = "Start";
+        clearInterval(countdownInterval);
+        document.getElementById("hours-unit").innerHTML = "";
+        document.getElementById("minutes-unit").innerHTML = "";
+        document.getElementById("seconds-unit").innerHTML = "";
+    }
+};
+
+let countdownInterval;
+
+function tickCountdown() {
+    let targetDateControl = document.getElementById("target-date");
+    let targetTimeControl = document.getElementById("target-time");
+
+    if (!targetDateControl.value || !targetTimeControl.value)
+    {
+        alert("Please set both date and time for the countdown.");
+        return;
+    }
+
+    let targetDate = new Date(targetDateControl.value + "T" + targetTimeControl.value);
+    countdownInterval = setInterval(() => {
+        let now = new Date();
+        let timeDifference = targetDate - now;
+
+        if (timeDifference <= 0) {
+            clearInterval(countdownInterval);
+            document.getElementById("hours-unit").innerHTML = "00";
+            document.getElementById("minutes-unit").innerHTML = "00";
+            document.getElementById("seconds-unit").innerHTML = "00";
+            alert("Countdown finished!");
+            return;
+        }
+
+        let hours = Math.floor(timeDifference / (1000 * 60 * 60));
+        let minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+        document.getElementById("hours-unit").innerHTML = addLeadingZero(hours);
+        document.getElementById("minutes-unit").innerHTML = addLeadingZero(minutes);
+        document.getElementById("seconds-unit").innerHTML = addLeadingZero(seconds);
+    }, 1000);
+}
+
+function addLeadingZero(number)
+{
+    return number < 10 ? "0" + number : number;
 }
