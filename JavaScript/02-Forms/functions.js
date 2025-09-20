@@ -5,7 +5,6 @@ function Power()
     let exponent = document.getElementById("exponent").value;
     document.getElementById("power").innerHTML = base ** exponent;
 }
-
 document.addEventListener("mousemove", GetMouseCoords);
 function GetMouseCoords(event)
 {
@@ -44,7 +43,6 @@ function UploadPhoto()
     alert(filename);
   //  alert(students_photo.value);
 }
-
 function setImage()
 {
 let filename = document.getElementById("students-photo");
@@ -57,33 +55,68 @@ reader.readAsDataURL(filename.files[0]);
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////                         Timer                           ////////////////////////
-
 document.body.onload = function tick_timer()
 {
     let time = new Date();
     document.getElementById("full-time").innerHTML = time;
-
     //            current-time
     document.getElementById("hours").innerHTML = addLeadingZero(time.getHours());
     document.getElementById("minutes").innerHTML = addLeadingZero(time.getMinutes());
     document.getElementById("seconds").innerHTML = addLeadingZero(time.getSeconds());
-
     //             current-day
     document.getElementById("year").innerHTML = addLeadingZero(time.getFullYear());
     document.getElementById("month").innerHTML = addLeadingZero(time.getMonth()+1);
     document.getElementById("day").innerHTML = addLeadingZero(time.getDate());
-
     //               week-day
     document.getElementById("weekday").innerHTML = time.toLocaleDateString("ru", { weekday: 'long' });
 
     //               Checkboxes:
     document.getElementById("current-date").style.visibility = document.getElementById("show-date").checked ? "visible" : "hidden";
     document.getElementById("weekday").style.visibility = document.getElementById("show-weekday").checked ? "visible" : "hidden";
-
-
     setTimeout(tick_timer, 100);
 }
 function addLeadingZero(number)
 {
     return number < 10 ? "0"+number : number;
+}
+document.getElementById("btn-start").onclick = function startCountdownTimer()
+{
+    let targetDateControl = document.getElementById("target-date");
+    let targetTimeControl = document.getElementById("target-time");
+    let btnStart = document.getElementById("btn-start");
+    targetDateControl.disabled = targetTimeControl.disabled = !targetDateControl.disabled;
+    if (btnStart.value === "Start")
+    {
+        btnStart.value = "Stop";
+        tickCountdown();
+     //   document.getElementById("target-date-value").innerHTML = targetDateControl.valueAsDate;
+     //   document.getElementById("target-time-value").innerHTML = targetTimeControl.valueAsDate;
+    }
+    else
+    {
+        btnStart.value = "Start";
+        document.getElementById("target-date-value").innerHTML = "Weiting...";
+        document.getElementById("target-time-value").innerHTML = "Weiting...";
+    }
+}
+
+function tickCountdown()
+{
+    if (!document.getElementById("target-time").disabled) return;
+    let now = new Date();
+    let targetDateControl = document.getElementById("target-date");
+    let targetTimeControl = document.getElementById("target-time");
+    let targetDate = targetDateControl.valueAsDate;
+    let targetTime = targetTimeControl.valueAsDate;
+    //Выравнивание часового пояса:
+    console.log(targetDate.getTimezoneOffset());
+    targetDate.setHours(targetDate.getHours() + targetDate.getTimezoneOffset() / 60);
+    targetTime.setHours(targetTime.getHours() + targetTime.getTimezoneOffset() / 60);
+    //Cводим даты и время в одну переменную:
+    targetTime.setFullYear(targetDate.getFullYear());
+    targetTime.setMonth(targetDate.getMonth());
+    targetTime.setDate(targetDate.getDate());
+    //Debug target datetime:
+    document.getElementById("target-date-value").innerHTML = targetDate;
+    document.getElementById("target-time-value").innerHTML = targetTime;
 }
