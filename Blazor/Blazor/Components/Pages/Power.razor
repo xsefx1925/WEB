@@ -4,10 +4,10 @@
 <h3>Power</h3>
 
 <label for="base">Основание степени: </label>
-<input type="number" name="base" @bind="number" onclick="Calculate"/>
+<input type="number" name="base" @bind="number" @onclick="Calculate"/>
 
 <label for="exponent">Показатель степени: </label>
-<input type="number" name="exponent" @bind="exponent" onclick="Calculate" />
+<input type="number" name="exponent" @bind="exponent" @onclick="Calculate" />
 
 <label for="power">Степень: </label>
 <span name="power">@power</span> 
