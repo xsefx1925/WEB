@@ -1,5 +1,7 @@
-﻿@page "/counter"
-@rendermode InteractiveServer  //без этой строки биндинг и события не обрабатываются
+﻿
+
+@page "/counter"
+@rendermode InteractiveServer
 
 <PageTitle>Counter</PageTitle>
 
@@ -10,10 +12,6 @@
 <input type="number" @bind="step" />
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
-
-<hr />
-<Power />
-<hr />
 
 @code 
 {

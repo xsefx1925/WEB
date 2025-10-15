@@ -1,0 +1,51 @@
+﻿@page "/fibonacci"
+@rendermode InteractiveServer
+
+<PageTitle>Fibonacci</PageTitle>
+
+<h3>Fibonacci</h3>
+
+<label for="inputNumber">Номер элемента (N):</label>
+<input type="number" id="inputNumber" @bind="n" />
+
+<button class="btn btn-primary mt-2" @onclick="CalculateFibonacci">Вычислить</button>
+
+<p class="mt-3">
+    **@n-й элемент ряда Фибоначчи:** **@result**
+</p>
+
+@code {
+    private int n = 0;
+    private string result = "N/A";
+
+    private void CalculateFibonacci()
+    {
+        if (n < 0)
+        {
+            result = "Ошибка: N должно быть >= 0";
+            return;
+        }
+        if (n == 0)
+        {
+            result = "0";
+            return;
+        }
+        if (n == 1)
+        {
+            result = "1";
+            return;
+        }
+
+        long a = 0;
+        long b = 1;
+        long temp = 0;
+
+        for (int i = 2; i <= n; i++)
+        {
+            temp = a + b;
+            a = b;
+            b = temp;
+        }
+        result = b.ToString();
+    }
+}

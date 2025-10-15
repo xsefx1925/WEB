@@ -1,0 +1,42 @@
+﻿@page "/factorial"
+@rendermode InteractiveServer
+
+<PageTitle>Factorial</PageTitle>
+
+<h3>Factorial</h3>
+
+<label for="inputNumber">Число (N):</label>
+<input type="number" id="inputNumber" @bind="number" />
+
+<button class="btn btn-primary mt-2" @onclick="CalculateFactorial">Вычислить</button>
+
+<p class="mt-3">
+    **Факториал (@number!):** **@result**
+</p>
+
+@code {
+    private int number = 0;
+    private string result = "N/A";
+
+    private void CalculateFactorial()
+    {
+        if (number < 0)
+        {
+            result = "Ошибка: N должно быть >= 0";
+            return;
+        }
+
+        if (number > 20) // Ограничение для int/long
+        {
+            result = "Слишком большое число";
+            return;
+        }
+
+        long fact = 1;
+        for (int i = 2; i <= number; i++)
+        {
+            fact *= i;
+        }
+        result = fact.ToString();
+    }
+}

@@ -1,0 +1,43 @@
+﻿@page "/bin2dec"
+@rendermode InteractiveServer
+
+<PageTitle>Bin &rarr; Dec</PageTitle>
+
+<h3>Binary &rarr; Decimal</h3>
+
+<label for="inputBin">Двоичное число:</label>
+<input type="text" id="inputBin" @bind="binNumber" @oninput="Convert" />
+
+<p class="mt-3">
+    **Десятичное представление:** **@decResult**
+</p>
+
+@code {
+    private string binNumber = "0";
+    private string decResult = "0";
+
+    private void Convert()
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(binNumber))
+            {
+                decResult = "0";
+                return;
+            }
+
+            // Проверяем, что строка содержит только 0 и 1
+            if (!System.Text.RegularExpressions.Regex.IsMatch(binNumber, "^[01]+$"))
+            {
+                decResult = "Ошибка: Недопустимые символы";
+                return;
+            }
+
+            decResult = System.Convert.ToInt32(binNumber, 2).ToString();
+        }
+        catch
+        {
+            decResult = "Ошибка: Слишком большое число";
+        }
+    }
+}
