@@ -1,0 +1,37 @@
+﻿@page "/groups"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using Academy.Models
+@using Academy.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<Academy.Data.AcademyContext> DbFactory
+
+<PageTitle>Groups</PageTitle>
+
+<h1>Список групп</h1>
+
+<QuickGrid Class="table" Items="GroupsQuery" Pagination="@pagination">
+
+    <PropertyColumn Property="g => g.group_id" Title="ID" Sortable="true" />
+    <PropertyColumn Property="g => g.group_name" Title="Название группы" Sortable="true" Filterable="true" />
+
+    <PropertyColumn Property="g => g.Direction!.direction_name" Title="Направление" Sortable="true" Filterable="true" />
+
+</QuickGrid>
+
+<Paginator State="@pagination" />
+
+@code {
+    private AcademyContext context = default!;
+    private PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+
+    // IQueryable с методом Include() для получения связанной сущности Direction
+    protected IQueryable<Group> GroupsQuery => context.Groups.Include(g => g.Direction).AsQueryable();
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}

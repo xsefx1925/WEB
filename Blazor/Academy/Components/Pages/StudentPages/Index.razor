@@ -1,0 +1,39 @@
+﻿@page "/students"
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using Academy.Models
+@using Academy.Data
+@implements IAsyncDisposable
+@inject IDbContextFactory<Academy.Data.AcademyContext> DbFactory
+
+<PageTitle>Students</PageTitle>
+
+<h1>Студенты</h1>
+
+<QuickGrid Class="table" Items="StudentsQuery" Pagination="@pagination">
+
+    <PropertyColumn Property="s => s.student_id" Title="ID" Sortable="true" />
+    <PropertyColumn Property="s => s.last_name" Title="Фамилия" Sortable="true" Filterable="true" />
+    <PropertyColumn Property="s => s.first_name" Title="Имя" Sortable="true" Filterable="true" />
+
+    <PropertyColumn Property="s => s.Group!.group_name" Title="Группа" Sortable="true" />
+
+</QuickGrid>
+
+<Paginator State="@pagination" />
+
+@code {
+    private AcademyContext context = default!;
+    // Настраиваем пагинацию: 10 элементов на страницу
+    private PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+
+    // Запрос с включением связанных данных Group
+    protected IQueryable<Student> StudentsQuery => context.Students.Include(s => s.Group).AsQueryable();
+
+    protected override void OnInitialized()
+    {
+        context = DbFactory.CreateDbContext();
+    }
+
+    public async ValueTask DisposeAsync() => await context.DisposeAsync();
+}
