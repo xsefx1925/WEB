@@ -1,7 +1,14 @@
+using ContosoUniversity.Data;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ContosoUniversity.Data.UniversityContext>
+    (
+    opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DataBaseConnection"))
+    );
 
 var app = builder.Build();
 
@@ -12,7 +19,14 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////
+IServiceScope scope = app.Services.CreateScope();
+IServiceProvider services = scope.ServiceProvider;
 
+ContosoUniversity.Data.UniversityContext context = services.GetRequiredService<UniversityContext>();
+DbInitializer.Initialize(context);
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
