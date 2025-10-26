@@ -6,22 +6,26 @@
 @implements IAsyncDisposable
 @inject IDbContextFactory<Academy.Data.AcademyContext> DbFactory
 
-<PageTitle>Directions</PageTitle>
+<PageTitle>Index</PageTitle>
 
-<h1>Направления обучения</h1>
+<h1>Index</h1>
 
-<QuickGrid Class="table" Items="context.Directions" Pagination="@pagination">
+<p>
+    <a href="directions/create">Create New</a>
+</p>
 
-    <PropertyColumn Property="d => d.direction_id" Title="ID" Sortable="true" />
-    <PropertyColumn Property="d => d.direction_name" Title="Название направления" Sortable="true" Filterable="true" />
+<QuickGrid Class="table" Items="context.Directions">
+    <PropertyColumn Property="direction => direction.direction_name" />
 
+    <TemplateColumn Context="direction">
+        <a href="@($"directions/edit?direction_id={direction.direction_id}")">Edit</a> |
+        <a href="@($"directions/details?direction_id={direction.direction_id}")">Details</a> |
+        <a href="@($"directions/delete?direction_id={direction.direction_id}")">Delete</a>
+    </TemplateColumn>
 </QuickGrid>
-
-<Paginator State="@pagination" />
 
 @code {
     private AcademyContext context = default!;
-    private PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
 
     protected override void OnInitialized()
     {

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TODOlist", "TODOlist\TODOli
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Movies", "Movies\Movies.csproj", "{264858E5-B645-416F-9FFC-209BCB2951B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academy", "Academy\Academy.csproj", "{7CB51E68-338F-493C-ADE8-FF69FA97AAE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academy", "Academy\Academy.csproj", "{38CFB4EF-CD61-4730-B963-5BDB4B390191}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{264858E5-B645-416F-9FFC-209BCB2951B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{264858E5-B645-416F-9FFC-209BCB2951B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{264858E5-B645-416F-9FFC-209BCB2951B2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CB51E68-338F-493C-ADE8-FF69FA97AAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CB51E68-338F-493C-ADE8-FF69FA97AAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CB51E68-338F-493C-ADE8-FF69FA97AAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CB51E68-338F-493C-ADE8-FF69FA97AAE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38CFB4EF-CD61-4730-B963-5BDB4B390191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38CFB4EF-CD61-4730-B963-5BDB4B390191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38CFB4EF-CD61-4730-B963-5BDB4B390191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38CFB4EF-CD61-4730-B963-5BDB4B390191}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

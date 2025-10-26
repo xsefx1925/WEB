@@ -1,6 +1,5 @@
-﻿using Mono.TextTemplating;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Academy.Models
 {
@@ -9,11 +8,13 @@ namespace Academy.Models
 		[Key]
 		public int group_id { get; set; }
 		[Required]
+		[StringLength(10)]
 		public string group_name { get; set; }
-		public int direction_id { get; set; }
-		
-		public Direction? Direction { get; set; }
-	
-		public ICollection<Student> Students { get; set; } = new List<Student>();
+		[Required]
+		[ForeignKey(nameof(Direction))]
+		public byte direction { get; set; }
+		[Required]
+		public Direction Direction { get; set; }
+
 	}
 }

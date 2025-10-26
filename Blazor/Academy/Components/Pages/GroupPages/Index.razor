@@ -6,27 +6,27 @@
 @implements IAsyncDisposable
 @inject IDbContextFactory<Academy.Data.AcademyContext> DbFactory
 
-<PageTitle>Groups</PageTitle>
+<PageTitle>Index</PageTitle>
 
-<h1>Список групп</h1>
+<h1>Index</h1>
 
-<QuickGrid Class="table" Items="GroupsQuery" Pagination="@pagination">
+<p>
+    <a href="groups/create">Create New</a>
+</p>
 
-    <PropertyColumn Property="g => g.group_id" Title="ID" Sortable="true" />
-    <PropertyColumn Property="g => g.group_name" Title="Название группы" Sortable="true" Filterable="true" />
+<QuickGrid Class="table" Items="context.Groups">
+    <PropertyColumn Property="group => group.group_name" />
+    <PropertyColumn Property="group => group.direction" />
 
-    <PropertyColumn Property="g => g.Direction!.direction_name" Title="Направление" Sortable="true" Filterable="true" />
-
+    <TemplateColumn Context="group">
+        <a href="@($"groups/edit?group_id={group.group_id}")">Edit</a> |
+        <a href="@($"groups/details?group_id={group.group_id}")">Details</a> |
+        <a href="@($"groups/delete?group_id={group.group_id}")">Delete</a>
+    </TemplateColumn>
 </QuickGrid>
-
-<Paginator State="@pagination" />
 
 @code {
     private AcademyContext context = default!;
-    private PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
-
-    // IQueryable с методом Include() для получения связанной сущности Direction
-    protected IQueryable<Group> GroupsQuery => context.Groups.Include(g => g.Direction).AsQueryable();
 
     protected override void OnInitialized()
     {
