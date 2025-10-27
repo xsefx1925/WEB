@@ -1,0 +1,80 @@
+﻿@model ContosoUniversity.Models.PaginatedList<ContosoUniversity.Models.Student>
+
+@{
+    ViewData["Title"] = "Студенты";
+}
+
+<h1>Студенты</h1>
+
+<p>
+    <a asp-action="Create">Создать нового</a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Найти по имени или фамилии: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Поиск" class="btn btn-primary" /> |
+            <a asp-action="Index">Полный список</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Полное имя
+                </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                    Дата зачисления
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName), @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ID">Изменить</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Детали</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-outline-secondary @prevDisabled">
+    Предыдущая
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-outline-secondary @nextDisabled">
+    Следующая
+</a>
+<p>
+    Страница @Model.PageIndex из @Model.TotalPages
+</p>
